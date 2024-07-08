@@ -7,13 +7,18 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
     ],
   );
-  runApp(const Creama());
+  runApp(
+    const ProviderScope(
+      child: Creama(),
+    ),
+  );
 }
 
 class Creama extends ConsumerWidget {

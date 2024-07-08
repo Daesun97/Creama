@@ -10,7 +10,8 @@ class AuthenticationRepository {
   Stream<User?> authStateChanges() => _firebaseAuth.authStateChanges();
 
 //이메일 비번 firebase와 소통
-  Future<UserCredential> signUp(String email, String password) async {
+  Future<UserCredential> signUp(
+      {required String email, required String password}) async {
     return await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
@@ -21,7 +22,7 @@ class AuthenticationRepository {
     await _firebaseAuth.signOut();
   }
 
-  Future<void> signIn(String email, String password) async {
+  Future<void> signIn({required String email, required String password}) async {
     await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
