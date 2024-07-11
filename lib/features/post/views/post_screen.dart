@@ -45,7 +45,6 @@ class _WritePostScreenState extends ConsumerState<WritePostScreen> {
         )
         .then((value) {
       context.pushReplacement(HomeScreen.routeURL);
-      ref.watch(homeTimelineProvider.notifier).refresh();
     });
   }
 
@@ -55,17 +54,14 @@ class _WritePostScreenState extends ConsumerState<WritePostScreen> {
       MaterialPageRoute(
         builder: (context) => const CameraScreen(),
       ),
-    ).then(
-      (value) {
-        if (value != null && mounted) {
-          for (var item in value) {
-            _selectedList.add(File(item.path));
-          }
-
-          setState(() {});
+    ).then((value) {
+      if (value != null && mounted) {
+        for (var item in value) {
+          _selectedList.add(File(item.path));
         }
-      },
-    );
+        setState(() {});
+      }
+    });
   }
 
   @override
@@ -101,76 +97,73 @@ class _WritePostScreenState extends ConsumerState<WritePostScreen> {
           ),
         ),
         child: Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-              title: const Text(
-                '오늘의 커피',
-              ),
-              // 세팅화면
-              leading: GestureDetector(
-                behavior: HitTestBehavior.translucent,
-                onTap: () {},
-                child: const FaIcon(FontAwesomeIcons.gear),
-              ),
+          appBar: AppBar(
+            centerTitle: true,
+            title: const Text('오늘의 커피'),
+            leading: GestureDetector(
+              behavior: HitTestBehavior.translucent,
+              onTap: () {},
+              child: const FaIcon(FontAwesomeIcons.gear),
             ),
-            body: Container(
-              height: MediaQuery.of(context).size.height * 0.3,
-              padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          DateTime.now().toString().split(' ').first,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        Gaps.v12,
-                        Expanded(
-                          child: TextField(
-                            controller: _textController,
-                            expands: true,
-                            minLines: null,
-                            maxLines: null,
-                            focusNode: _focusNode,
-                            decoration: InputDecoration(
-                              border: const UnderlineInputBorder(
-                                  borderSide: BorderSide.none),
-                              hintText: '오늘 마신 커피는 어떤 맛이었나요?',
-                              hintStyle: TextStyle(
-                                color: Colors.grey.shade500,
-                              ),
-                            ),
-                          ),
-                        ),
-                        if (_selectedList.isNotEmpty) ...[
-                          WritePostImageListView(
-                            selectedList: _selectedList,
-                            deletePhoto: _onDeletePhotoTap,
-                          ),
-                          Gaps.v8,
-                        ],
-                        GestureDetector(
-                          behavior: HitTestBehavior.translucent,
-                          onTap: _onCameraTap,
-                          child: Padding(
-                            padding: const EdgeInsets.all(Sizes.size3),
-                            child: FaIcon(
-                              FontAwesomeIcons.cameraRetro,
+          ),
+          body: Container(
+            height: MediaQuery.of(context).size.height * 0.3,
+            padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        DateTime.now().toString().split(' ').first,
+                        style: const TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      Gaps.v12,
+                      Expanded(
+                        child: TextField(
+                          controller: _textController,
+                          expands: true,
+                          minLines: null,
+                          maxLines: null,
+                          focusNode: _focusNode,
+                          decoration: InputDecoration(
+                            border: const UnderlineInputBorder(
+                                borderSide: BorderSide.none),
+                            hintText: '오늘 마신 커피는 어떤 맛이었나요?',
+                            hintStyle: TextStyle(
                               color: Colors.grey.shade500,
-                              size: Sizes.size24,
                             ),
                           ),
                         ),
+                      ),
+                      if (_selectedList.isNotEmpty) ...[
+                        WritePostImageListView(
+                          selectedList: _selectedList,
+                          deletePhoto: _onDeletePhotoTap,
+                        ),
+                        Gaps.v8,
                       ],
-                    ),
+                      GestureDetector(
+                        behavior: HitTestBehavior.translucent,
+                        onTap: _onCameraTap,
+                        child: Padding(
+                          padding: const EdgeInsets.all(Sizes.size3),
+                          child: FaIcon(
+                            FontAwesomeIcons.cameraRetro,
+                            color: Colors.grey.shade500,
+                            size: Sizes.size24,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            bottomSheet:
-                PostBottomSheetAppBar(text: _text, onpost: _onPostTap)),
+          ),
+          bottomSheet: PostBottomSheetAppBar(text: _text, onpost: _onPostTap),
+        ),
       ),
     );
   }

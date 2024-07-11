@@ -46,7 +46,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         );
 
     if (mounted) {
-      context.goNamed('Home');
+      context.goNamed('/home');
     }
   }
 

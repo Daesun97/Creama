@@ -12,7 +12,7 @@ class PostViewModel extends AsyncNotifier<void> {
 
   @override
   FutureOr<void> build() {
-    _repository = ref.read(postRepo);
+    _repository = ref.read(postRepoProvider);
   }
 
   Future<void> uploadPost({
@@ -26,7 +26,7 @@ class PostViewModel extends AsyncNotifier<void> {
     if (state.isLoading) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('커피 이모티콘'),
+          content: Text('Uploading...'),
         ),
       );
     }
@@ -47,13 +47,13 @@ class PostViewModel extends AsyncNotifier<void> {
         }
         await _repository.savePost(
           PostModel(
-            like: 0,
             id: '',
             content: content,
             images: downloadUrls,
             creatorUid: user!.uid,
-            creator: "미상",
+            creator: user.displayName ?? "Unknown",
             createdAt: DateTime.now().millisecondsSinceEpoch,
+            like: 0,
           ),
         );
       },

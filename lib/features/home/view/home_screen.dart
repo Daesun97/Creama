@@ -1,7 +1,6 @@
 import 'package:creama/features/home/view_model/home_vm.dart';
 import 'package:creama/utils/sizes.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -44,7 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           loading: () => const Center(
             child: CircularProgressIndicator(),
           ),
-          data: (post) {
+          data: (posts) {
             return SafeArea(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: Sizes.size16),
@@ -67,7 +66,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                         ),
                         centerTitle: true,
                       ),
-                      post.isEmpty
+                      posts.isEmpty
                           ? SliverToBoxAdapter(
                               child: SizedBox(
                                 height:
@@ -84,25 +83,25 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                             )
                           : SliverList.separated(
-                              itemCount:
-                                  post.length < 3 ? post.length : post.length,
+                              itemCount: posts.length,
                               itemBuilder: (context, index) {
-                                if (index > post.length - 1) {
-                                  return Container(
-                                    height: 250,
-                                  );
-                                }
-                                return null;
+                                final post = posts[index];
+                                return ListTile(
+                                  title: Text(post.content),
+                                  subtitle: Text(
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                            post.createdAt)
+                                        .toString(),
+                                  ),
+                                );
                               },
                               separatorBuilder: (context, index) {
-                                return index > post.length - 1
-                                    ? const SizedBox.shrink()
-                                    : Divider(
-                                        thickness: 1,
-                                        color: Colors.grey.shade500,
-                                      );
+                                return Divider(
+                                  thickness: 1,
+                                  color: Colors.grey.shade500,
+                                );
                               },
-                            )
+                            ),
                     ],
                   ),
                 ),

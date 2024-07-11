@@ -8,13 +8,13 @@ class PostModel {
   final int like;
 
   PostModel({
-    required this.like,
     required this.id,
     required this.content,
     required this.images,
     required this.creatorUid,
     required this.creator,
     required this.createdAt,
+    required this.like,
   });
 
   Map<String, dynamic> toJson() {
