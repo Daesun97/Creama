@@ -1,6 +1,7 @@
 import 'package:creama/features/authentication/repository/auth_repo.dart';
 import 'package:creama/features/authentication/views/login_screen.dart';
 import 'package:creama/features/authentication/views/signin_screen.dart';
+import 'package:creama/features/home/view/home_screen.dart';
 import 'package:creama/main_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -34,6 +35,11 @@ final routerProvider = Provider(
           path: SignUpScreen.routeURL,
           builder: (context, state) => const SignUpScreen(),
         ),
+        // GoRoute(
+        //   name: HomeScreen.routeName,
+        //   path: HomeScreen.routeURL,
+        //   builder: (context, state) => const HomeScreen(),
+        // ),
         GoRoute(
           path: '/:tab(home|post)',
           name: MainScreen.routeName,

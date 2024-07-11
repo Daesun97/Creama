@@ -3,6 +3,8 @@ import 'package:creama/features/authentication/views/login_screen.dart';
 import 'package:creama/features/authentication/widgets/auth_form_field.dart';
 import 'package:creama/features/authentication/widgets/form_button.dart';
 import 'package:creama/features/authentication/widgets/form_check.dart';
+import 'package:creama/features/home/view/home_screen.dart';
+import 'package:creama/main_screen.dart';
 import 'package:creama/utils/gaps.dart';
 import 'package:creama/utils/sizes.dart';
 import 'package:flutter/material.dart';
@@ -44,7 +46,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         );
 
     if (mounted) {
-      context.go('/home');
+      context.goNamed('Home');
     }
   }
 

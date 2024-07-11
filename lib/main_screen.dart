@@ -1,6 +1,6 @@
 import 'package:creama/features/home/view/home_screen.dart';
 import 'package:creama/features/home/view/widgets/nav_tab.dart';
-import 'package:creama/post_screen.dart';
+import 'package:creama/features/post/views/post_screen.dart';
 import 'package:creama/utils/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -42,12 +42,12 @@ class _MainScreenState extends State<MainScreen> {
           ),
           Offstage(
             offstage: _selectedIndex != 1,
-            child: const PostScreen(),
+            child: const WritePostScreen(),
           ),
         ],
       ),
       bottomNavigationBar: Container(
-        color: Theme.of(context).canvasColor,
+        color: const Color(0xFF452F2B),
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: Sizes.size12),
           child: Row(
@@ -57,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
                 text: 'Home',
                 isSelected: _selectedIndex == 0,
                 icon: FontAwesomeIcons.house,
-                selectedIcon: FontAwesomeIcons.house,
+                selectedIcon: FontAwesomeIcons.mugHot,
                 selectedIndex: _selectedIndex,
                 onTap: () => _onTap(0),
               ),

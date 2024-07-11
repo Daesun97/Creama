@@ -31,11 +31,16 @@ class NavTab extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                FaIcon(isSelected ? selectedIcon : icon),
+                FaIcon(
+                  isSelected ? selectedIcon : icon,
+                  color: isSelected ? Colors.white : const Color(0xFFE3B964),
+                ),
                 Gaps.v5,
                 Text(
                   text,
-                  style: TextStyle(color: Theme.of(context).primaryColor),
+                  style: TextStyle(
+                    color: isSelected ? Colors.white : const Color(0xFFE3B964),
+                  ),
                 )
               ],
             ),
