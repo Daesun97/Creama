@@ -20,7 +20,7 @@ class AuthFormButton extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
-          color: isEnabled ? const Color(0xFF0B64E1) : Colors.grey,
+          color: isEnabled ? const Color(0xFF5C000E) : Colors.grey,
           borderRadius: BorderRadius.circular(4),
         ),
         padding: const EdgeInsets.symmetric(vertical: 16),

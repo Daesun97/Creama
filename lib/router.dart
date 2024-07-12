@@ -16,8 +16,8 @@ final routerProvider = Provider(
         //유저가 로그인이 안 돼있는데
         if (!isLogedIn) {
           //가입 화면이나 로그인 화면이 아니라면
-          if (state.subloc != SignUpScreen.routeURL &&
-              state.subloc != LogInScreen.routeURL) {
+          if (state.subloc != LogInScreen.routeURL &&
+              state.subloc != SignUpScreen.routeURL) {
             //처음화면으로(가입)
             return LogInScreen.routeURL;
           }

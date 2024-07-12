@@ -17,7 +17,7 @@ class PostBottomSheetAppBar extends StatelessWidget {
         children: [
           const Text(
             "오늘 커피도 맛나다",
-            style: TextStyle(color: Colors.blueGrey),
+            style: TextStyle(color: Color(0xFFC7BCAC)),
           ),
           GestureDetector(
             behavior: HitTestBehavior.translucent,
@@ -25,7 +25,8 @@ class PostBottomSheetAppBar extends StatelessWidget {
             child: Text(
               "Post",
               style: TextStyle(
-                color: Colors.blueGrey.withOpacity(text != "" ? 1 : 0.5),
+                color:
+                    const Color(0xFF452F2B).withOpacity(text != "" ? 1 : 0.5),
                 fontSize: Sizes.size18,
                 fontWeight: FontWeight.w600,
               ),

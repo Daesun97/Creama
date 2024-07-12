@@ -12,21 +12,25 @@ class HomeTimelineViewModel extends AsyncNotifier<List<PostModel>> {
   FutureOr<List<PostModel>> build() async {
     _repository = ref.read(postRepo);
     _postsList = await _fetchPosts(lastItemCreatedAt: null);
-
     return _postsList;
   }
 
   Future<List<PostModel>> _fetchPosts({int? lastItemCreatedAt}) async {
     final result =
         await _repository.fetchPost(lastItemCreatedAt: lastItemCreatedAt);
-    final posts =
-        result.docs.map((item) => PostModel.fromJson(json: item.data()));
-
+    final posts = result.docs
+        .map((item) => PostModel.fromJson(json: item.data(), postId: item.id));
     return posts.toList();
   }
 
+  Future<void> fetchNextPage() async {
+    final nextPage =
+        await _fetchPosts(lastItemCreatedAt: _postsList.last.createdAt);
+    _postsList = [..._postsList, ...nextPage];
+    state = AsyncValue.data(_postsList);
+  }
+
   Future<void> refresh() async {
-    state = const AsyncValue.loading();
     final posts = await _fetchPosts(lastItemCreatedAt: null);
     _postsList = posts;
     state = AsyncValue.data(posts);
@@ -35,5 +39,5 @@ class HomeTimelineViewModel extends AsyncNotifier<List<PostModel>> {
 
 final homeTimelineProvider =
     AsyncNotifierProvider<HomeTimelineViewModel, List<PostModel>>(
-  () => HomeTimelineViewModel(),
+  HomeTimelineViewModel.new,
 );

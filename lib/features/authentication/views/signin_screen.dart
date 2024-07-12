@@ -46,7 +46,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
         );
 
     if (mounted) {
-      context.goNamed('Home');
+      context.go('/home');
     }
   }
 
@@ -85,7 +85,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                     ),
                     Gaps.v20,
                     AuthFormButton(
-                        title: '카페 입장',
+                        title: '카페 가입',
                         onPressed: _onSignUpPressed,
                         isEnabled: !isLoading),
                   ],
@@ -94,7 +94,10 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
               Gaps.v80,
               GestureDetector(
                 onTap: () => _onLoginTap(context),
-                child: const Text('이미 가입 했아요.'),
+                child: const Text(
+                  '이미 가입 했어요.',
+                  style: TextStyle(fontSize: Sizes.size20),
+                ),
               )
             ],
           ),

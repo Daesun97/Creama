@@ -104,7 +104,10 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                   onTap: () => _onCreateAccountPressed(context),
                   child: const Text(
                     '첫 손님',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: Sizes.size24,
+                        color: Color(0xFF452F2B)),
                   ),
                 ),
                 Gaps.v40
