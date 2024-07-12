@@ -7,7 +7,6 @@ import 'package:creama/features/post/view_model/post_vm.dart';
 import 'package:creama/utils/sizes.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
@@ -113,6 +112,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               size: Sizes.size28,
                             ),
                           ),
+<<<<<<< HEAD
                           centerTitle: true,
                           actions: [
                             Padding(
@@ -128,6 +128,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               ),
                             ),
                           ]),
+=======
+                        ),
+                        centerTitle: true,
+                      ),
+>>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
                       posts.isEmpty
                           ? SliverToBoxAdapter(
                               child: SizedBox(
@@ -149,6 +154,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                               itemBuilder: (context, index) {
                                 final post = posts[index];
                                 return ListTile(
+<<<<<<< HEAD
                                   title: Text(
                                     DateTime.fromMillisecondsSinceEpoch(
                                             post.createdAt)
@@ -177,6 +183,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                     onTap: () => _onDelete(post.id),
                                     child:
                                         const FaIcon(FontAwesomeIcons.trashCan),
+=======
+                                  title: Text(post.content),
+                                  subtitle: Text(
+                                    DateTime.fromMillisecondsSinceEpoch(
+                                            post.createdAt)
+                                        .toString(),
+>>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
                                   ),
                                 );
                               },
@@ -186,7 +199,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                   color: Colors.grey.shade500,
                                 );
                               },
-                            )
+                            ),
                     ],
                   ),
                 ),

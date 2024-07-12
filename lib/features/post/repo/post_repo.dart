@@ -9,6 +9,7 @@ class PostRepository {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
   final FirebaseStorage _storage = FirebaseStorage.instance;
 
+<<<<<<< HEAD
   UploadTask uploadPost(File image, String uid) {
     final fileRef = _storage.ref().child(
         "/images/$uid/${DateTime.now().millisecondsSinceEpoch.toString()}");
@@ -49,10 +50,30 @@ class PostRepository {
     } else {
       await query.delete();
     }
+=======
+  List<UploadTask> uploadPost(List<File> images, String uid) {
+    List<UploadTask> uploadTasks = [];
+    for (var image in images) {
+      final fileRef = _storage.ref().child(
+          "/images/$uid/${DateTime.now().millisecondsSinceEpoch.toString()}");
+      uploadTasks.add(fileRef.putFile(image));
+    }
+    return uploadTasks;
+  }
+
+  Future<void> savePost(PostModel data) async {
+    await _db.collection("post").add(data.toJson());
+  }
+
+  Future<void> deletePost(String doc) async {
+    final post = _db.collection("post").doc(doc);
+    await post.delete();
+>>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
   }
 
   Future<QuerySnapshot<Map<String, dynamic>>> fetchPost(
       {int? lastItemCreatedAt}) {
+<<<<<<< HEAD
     final query =
         _db.collection("post").orderBy("createdAt", descending: true).limit(10);
     if (lastItemCreatedAt == null) {
@@ -60,6 +81,11 @@ class PostRepository {
     } else {
       return query.startAfter([lastItemCreatedAt]).get();
     }
+=======
+    final query = _db.collection("post").orderBy("createdAt", descending: true);
+    return query.get();
+  }
+>>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
 
     // Future<QuerySnapshot<Map<String, dynamic>>> fetchUserPost(String uid) {
     //   final query = _db
@@ -70,6 +96,7 @@ class PostRepository {
     //   return query.get();
     // }
 
+<<<<<<< HEAD
     // Stream<List<PostModel>> streamAllPosts() {
     //   return _db
     //       .collection('post')
@@ -79,7 +106,17 @@ class PostRepository {
     //           .map((doc) => PostModel.fromJson(json: doc.data()))
     //           .toList());
     // }
+=======
+  Stream<List<PostModel>> streamAllPosts() {
+    return _db
+        .collection('post')
+        .orderBy("createdAt", descending: true)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => PostModel.fromJson(json: doc.data()))
+            .toList());
+>>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
   }
 }
 
-final postRepo = Provider((ref) => PostRepository());
+final postRepoProvider = Provider((ref) => PostRepository());
