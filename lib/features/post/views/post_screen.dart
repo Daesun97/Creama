@@ -152,11 +152,7 @@ class _WritePostScreenState extends ConsumerState<WritePostScreen> {
                           child: FaIcon(
                             FontAwesomeIcons.cameraRetro,
                             color: Colors.grey.shade500,
-<<<<<<< HEAD
-                            size: Sizes.size40,
-=======
                             size: Sizes.size24,
->>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
                           ),
                         ),
                       ),

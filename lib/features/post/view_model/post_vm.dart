@@ -13,15 +13,10 @@ class PostViewModel extends AsyncNotifier<List<PostModel>> {
   List<PostModel> _postsList = [];
 
   @override
-<<<<<<< HEAD
   FutureOr<List<PostModel>> build() async {
-    _repository = ref.read(postRepo);
+    _repository = ref.read(postRepoProvider);
     _postsList = await _fetchPosts(lastItemCreatedAt: null);
     return _postsList;
-=======
-  FutureOr<void> build() {
-    _repository = ref.read(postRepoProvider);
->>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
   }
 
   Future<List<PostModel>> _fetchPosts({int? lastItemCreatedAt}) async {
@@ -65,7 +60,6 @@ class PostViewModel extends AsyncNotifier<List<PostModel>> {
                 )
               : [];
 
-<<<<<<< HEAD
           final newPost = PostModel(
             id: "",
             like: 0,
@@ -95,43 +89,6 @@ class PostViewModel extends AsyncNotifier<List<PostModel>> {
     await _repository.deletePost(postId);
     _postsList.removeWhere((doc) => doc.id == postId);
     state = AsyncValue.data(_postsList);
-=======
-    if (state.isLoading) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Uploading...'),
-        ),
-      );
-    }
-    state = await AsyncValue.guard(
-      () async {
-        List<String> downloadUrls = [];
-
-        if (images.isNotEmpty) {
-          final tasks = _repository.uploadPost(images, user!.uid);
-          downloadUrls = await Future.wait(
-            tasks.map(
-              (task) async {
-                final snapshot = await task.whenComplete(() => {});
-                return await snapshot.ref.getDownloadURL();
-              },
-            ),
-          );
-        }
-        await _repository.savePost(
-          PostModel(
-            id: '',
-            content: content,
-            images: downloadUrls,
-            creatorUid: user!.uid,
-            creator: user.displayName ?? "Unknown",
-            createdAt: DateTime.now().millisecondsSinceEpoch,
-            like: 0,
-          ),
-        );
-      },
-    );
->>>>>>> 33a3afcb8bdd8621ff4a4e17e3d0b90babc362ca
   }
 }
 
