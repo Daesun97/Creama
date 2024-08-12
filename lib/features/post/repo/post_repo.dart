@@ -21,7 +21,7 @@ class PostRepository {
   }
 
   Future<void> deletePost(postId) async {
-    final query = _db.collection("posts").doc(postId);
+    final query = _db.collection("post").doc(postId);
     final post = await query.get();
     if (!post.exists) {
       print("postID: $postId doesn't exist");

@@ -6,7 +6,6 @@ import 'package:creama/features/post/model/post_model.dart';
 import 'package:creama/features/post/repo/post_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class PostViewModel extends AsyncNotifier<List<PostModel>> {
   late final PostRepository _repository;
@@ -47,7 +46,7 @@ class PostViewModel extends AsyncNotifier<List<PostModel>> {
   }) async {
     final user = ref.read(authRepo).user;
     if (user != null) {
-      state = const AsyncValue.loading();
+      // state = const AsyncValue.loading();
       state = await AsyncValue.guard(
         () async {
           List<String> imgUrls = images != null
@@ -86,9 +85,10 @@ class PostViewModel extends AsyncNotifier<List<PostModel>> {
   }
 
   Future<void> deletePost(postId) async {
-    await _repository.deletePost(postId);
     _postsList.removeWhere((doc) => doc.id == postId);
+    print('포스트아이디 $postId');
     state = AsyncValue.data(_postsList);
+    await _repository.deletePost(postId);
   }
 }
 

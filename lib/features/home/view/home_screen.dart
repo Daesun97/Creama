@@ -1,8 +1,7 @@
 import 'package:creama/features/authentication/repository/auth_repo.dart';
 import 'package:creama/features/authentication/views/login_screen.dart';
 import 'package:creama/features/home/view/widgets/images.dart';
-import 'package:creama/features/home/view_model/home_vm.dart';
-import 'package:creama/features/post/repo/post_repo.dart';
+
 import 'package:creama/features/post/view_model/post_vm.dart';
 import 'package:creama/utils/sizes.dart';
 import 'package:flutter/cupertino.dart';
@@ -51,8 +50,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   // }
 
   void _onDelete(String postId) {
-    print("delete: $postId");
-    showCupertinoModalPopup(
+    // print("delete: $postId");
+
+    showModalBottomSheet(
       context: context,
       builder: (context) => CupertinoActionSheet(
         title: const Text("이 향기를 잊습니다"),
