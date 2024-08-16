@@ -18,11 +18,21 @@ class PostViewModel extends AsyncNotifier<List<PostModel>> {
     return _postsList;
   }
 
+  // Future<List<PostModel>> _fetchPosts({int? lastItemCreatedAt}) async {
+  //   final result =
+  //       await _repository.fetchPost(lastItemCreatedAt: lastItemCreatedAt);
+  //   final posts = result.docs
+  //       .map((item) => PostModel.fromJson(json: item.data(), postId: item.id));
+  //   return posts.toList();
+  // }
+
   Future<List<PostModel>> _fetchPosts({int? lastItemCreatedAt}) async {
     final result =
         await _repository.fetchPost(lastItemCreatedAt: lastItemCreatedAt);
-    final posts = result.docs
-        .map((item) => PostModel.fromJson(json: item.data(), postId: item.id));
+    final posts = result.docs.map((item) {
+      final data = item.data(); // json 데이터를 가져옴
+      return PostModel.fromJson(data).copyWith(id: item.id);
+    });
     return posts.toList();
   }
 

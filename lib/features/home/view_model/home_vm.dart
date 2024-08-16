@@ -19,8 +19,10 @@ class HomeTimelineViewModel extends AsyncNotifier<List<PostModel>> {
     final result =
         await _repository.fetchPost(lastItemCreatedAt: lastItemCreatedAt);
 
-    final posts = result.docs
-        .map((item) => PostModel.fromJson(json: item.data(), postId: item.id));
+    final posts = result.docs.map((item) {
+      final data = item.data();
+      return PostModel.fromJson(data).copyWith(id: item.id);
+    });
     return posts.toList();
   }
 

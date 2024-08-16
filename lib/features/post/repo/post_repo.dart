@@ -55,9 +55,10 @@ class PostRepository {
         .collection('post')
         .orderBy("createdAt", descending: true)
         .snapshots()
-        .map((snapshot) => snapshot.docs
-            .map((doc) => PostModel.fromJson(json: doc.data(), postId: doc.id))
-            .toList());
+        .map((snapshot) => snapshot.docs.map((doc) {
+              final data = doc.data(); // JSON 데이터를 가져옴
+              return PostModel.fromJson(data).copyWith(id: doc.id);
+            }).toList());
   }
 }
 
